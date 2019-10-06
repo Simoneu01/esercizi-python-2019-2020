@@ -5,25 +5,26 @@
 # Project: Gestionale Bibblioteca
 
 class Utenti():
-    def __init__(self, data):
-        self.nome = data[nome]
-        self.cognome = data[cognome]
-        self.email = data[email]
-        self.telefono = data[telefono]
-        self.cap = data[cap]
-        self.codice_fiscale = data[codice_fiscale]
-        self.lista_libri = data[lista_libri]
+    def __init__(self, userid, nome, cognome, email, telefono, codice_fiscale=None, cap=None):
+        self.id = userid
+        self.nome = nome
+        self.cognome = cognome
+        self.email = email
+        self.telefono = telefono
+        self.cap = cap
+        self.codice_fiscale = codice_fiscale
+        self.lista_libri = []
 
     def modifica(self, nome, cognome, email, telefono, cap, codice_fiscale):
-        if self.nome != nome:
+        if self.nome != nome & nome != '':
             self.nome = nome
-        if self.cognome != cognome:
+        if self.cognome != cognome & cognome != '':
             self.cognome = cognome
-        if self.email != email:
+        if self.email != email & email != '':
             self.email = email
-        if self.telefono != telefono:
+        if self.telefono != telefono & telefono != '':
             self.telefono = telefono
-        if self.codice_fiscale != codice_fiscale:
+        if self.codice_fiscale != codice_fiscale & codice_fiscale != '':
             self.codice_fiscale = codice_fiscale
-        if self.cap != cap:
+        if self.cap != cap & cap != '':
             self.cap = cap

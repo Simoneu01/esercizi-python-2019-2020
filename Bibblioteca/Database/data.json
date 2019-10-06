@@ -1,10 +1,4 @@
 {
-    "UserId": null,
-    "titolo": "titolo",
-    "genere": "genere",
-    "autore": "autore",
-    "in_prestito": false,
-    "preso_il": null,
-    "ritardo": false,
-    "scadenza": null
+    "Identificativo_Utente_AI": 0,
+    "Identificativo_Libro_AI": 2
 }

@@ -1,0 +1,15 @@
+[
+    {
+        "libroid": 0,
+        "titolo": "Libro 1",
+        "genere": "Genere 1",
+        "autore": "Autore 1"
+    },
+    {
+        "libroid": 1,
+        "titolo": "Titolo 2",
+        "genere": "Genere 2",
+        "autore": "Autore 2",
+        "isbn": "ISBN 2"
+    }
+]
