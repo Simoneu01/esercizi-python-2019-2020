@@ -24,6 +24,13 @@ def obj_dict(obj):
 
 class Bibblioteca:
     def __init__(self):
+        try:
+            os.mkdir(".\\Database")
+        except OSError:
+            print("Errore di Sistema")
+        else:
+            print("Directory Creata")
+
         # Gestione Lista Libri
         if os.path.isfile(nome_libri_json):
             with open(nome_libri_json, "r") as read_file:
