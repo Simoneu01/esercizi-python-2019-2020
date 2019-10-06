@@ -1,11 +1,17 @@
 ####Biblioteca####
 ##By John Patrick Gabriel##
-##Last update 4/10/2019 time:12.35Pm##
+##Last update 6/10/2019 time:12.35Pm##
 
 import datetime
 
 ##Classi##
 class Libro:
+    titolo = ''
+    genere = ''
+    autore = ''
+    codice = ''
+    prestato = ''
+
     def __init__(self,titolo,autore,genere,codice,prestato):
         self.titolo = titolo
         self.autore = autore
@@ -19,6 +25,21 @@ class Libro:
     def modificalibro(self,prestato):
         self.prestato = prestato
 
+    def modificatuttolibro(self,titolo,autore,genere,codice,prestato):
+        if titolo != '':
+            self.titolo = titolo
+        if autore != '':
+            self.autore = autore
+        if genere != '':
+            self.genere = genere
+        if codice != '':
+            self.codice = codice
+        if prestato != '':
+            self.prestato = prestato
+
+    def filelibri(self,f):
+        f.write(self.titolo+','+self.autore+','+self.genere+','+self.codice+','+self.prestato+'\n')
+
 class Utente:
     nome = ''
     cognome = ''
@@ -30,18 +51,58 @@ class Utente:
         self.cognome = cognome
         self.codice = codice
         self.libroprenotato = libroprenotato
-
+        
     def visualizzautente(self):
         print(self.nome,self.cognome,self.codice,self.libroprenotato)
 
     def modificalibroprenotato(self,libroprenotato):
         self.libroprenotato = libroprenotato
 
+    def modificatuttoutente(self,nome,cognome,codice,libroprenotato):
+        if nome != '':
+            self.nome = nome
+        if cognome != '':
+            self.cognome = cognome
+        if codice != '':
+            self.codice = codice
+        if libroprenotato != '':
+            self.libroprenotato = libroprenotato
+    
+    def fileutenti(self,f):
+        f.write(self.nome+','+self.cognome+','+self.codice+','+self.libroprenotato+'\n')
+
+
+        
 ##MAIN##
 scelta = ''
 lista_libri = []
 lista_utenti = []
 lista_prenotati = []
+
+try:
+    with open("Libri.txt") as f:
+        read = f.readlines()
+    for cont in range(len(read)):
+        temp = read[cont]
+        temp = temp.split(",")
+        temp.remove("\n")
+        libro = Libro(temp[0],temp[1],temp[2],temp[3],temp[4])
+        lista_libri.append(libro)
+except:
+    pass
+
+try:
+  with open("Utenti.txt") as f:
+    read = f.readlines()
+    for cont in range(len(read)):
+        temp = read[cont]
+        temp = temp.split(",")
+        temp.remove("\n")
+        tesserato = Utente(temp[0],temp[1],temp[2],temp[3])
+        lista_utenti.append(tesserato)
+except:
+    pass
+
 
 while(scelta != '11'):
     print('''
@@ -65,7 +126,7 @@ while(scelta != '11'):
         autore = input('Inserire l\'autore del libro: ')
         genere = input('Inserire il genere del libro: ')
         codice = input('Inserire il codice del libro: ')
-        prestato = False
+        prestato = 'False'
 
         libro = Libro(titolo,autore,genere,codice,prestato)
 
@@ -98,17 +159,14 @@ while(scelta != '11'):
                     if ricercacodiceutente == lista_utenti[cont].codice and lista_utenti[cont].libroprenotato == 'False':     
                         for cont in range(len(lista_libri)):
                             if cercalib == lista_libri[cont].codice:
-                                if lista_libri[cont].prestato == False:
-                                    prestato = True
+                                if lista_libri[cont].prestato == 'False':
+                                    prestato = 'True'
                                     lista_libri[cont].modificalibro(prestato)
                                     lista_utenti[cont].modificalibroprenotato(lista_libri[cont].codice)
                                     print(lista_libri[cont].visualizzalibro(),'\nLibro prenotato')
                                     giaprenotato = False
                                 else:
                                     print('Libro gia prenotato.')
-
-                    elif lista_utenti[cont].libroprenotato != 'False':
-                        giaprenotato = True
 
             if giaprenotato == True:
                 print('\n\n\nL\'utente ha gia un libro prenotato o ha inserito il codice utente sbagliato.')
@@ -133,8 +191,8 @@ while(scelta != '11'):
                     if ricercacodiceutente == lista_utenti[cont].codice and lista_utenti[cont].libroprenotato != 'False':     
                         for cont in range(len(lista_libri)):
                             if cercalib == lista_libri[cont].codice:
-                                if lista_libri[cont].prestato == True:
-                                    prestato = False
+                                if lista_libri[cont].prestato == 'True':
+                                    prestato = 'False'
                                     lista_libri[cont].modificalibro(prestato)
                                     libroprenotato = 'False'
                                     lista_utenti[cont].modificalibroprenotato(libroprenotato)
@@ -142,9 +200,6 @@ while(scelta != '11'):
                                     giareso = True
                                 else:
                                     print('Reso gia effettuato.')
-
-                    elif lista_utenti[cont].libroprenotato == 'False':
-                        giareso = False
 
             if giareso == False:
                 print('\n\n\nL\'utente non ha un libro prenotato o ha inserito il codice utente sbagliato.')
@@ -155,52 +210,74 @@ while(scelta != '11'):
 
     ##Ricerca/Modifica/Cancellazione di un libro##
     elif scelta == '5':
+        nonmodifica = False
         modifica = input('Inserire il codice del libro da ricercare: ')
+        
+        for cont in range (len(lista_utenti)):
+            if lista_utenti[cont].libroprenotato == modifica:
+                nonmodifica = True
+                
+        if nonmodifica == False:
+            trovato = False
+            for cont in range(len(lista_libri)):
+                if modifica == lista_libri[cont].codice:
+                    trovato = True
+                    print(lista_libri[cont].visualizzalibro())
+                    modcanc = input('Desidera modificare o cancellare il libro?\n1-Modifica\n2-Cancella\n>>>')
 
-        trovato= False
-        for cont in range(len(lista_libri)):
-            if modifica == lista_libri[cont].codice:
-                trovato = True
-                print(lista_libri[cont].visualizzalibro())
-                modcanc = input('Desidera modificare o cancellare il libro?\n1-Modifica\n2-Cancella\n>>>')
-
-                if modcanc == '1':
-                    titolo = input('')
-                    autore = input('')
-                    genere = input('')
-                    codice = input('')
-                    prestato = False
+                    if modcanc == '1':
+                        titolo = input('Inserire il nuovo titolo oppure lasciare vuoto con invio: ')
+                        autore = input('Inserire il nuovo autore oppure lasciare vuoto con invio: ')
+                        genere = input('Inserire il nuovo genere oppure lasciare vuoto con invio: ')
+                        codice = input('Inserire il nuovo codice oppure lasciare vuoto con invio: ')
+                        prestato = 'False'
+                        
+                        lista_libri[cont].modificatuttolibro(titolo,autore,genere,codice,prestato)
                     
-                elif modcanc == '2':
-                    pass
-                else:
-                    print('\n\n\nErrore....riprovare.')
+                    elif modcanc == '2':
+                        lista_libri.remove(lista_libri[cont])
+                    else:
+                        print('\n\n\nErrore....riprovare.')
 
-        if trovato == False:
-            print('\n\n\nLibro non trovato.')
+            if trovato == False:
+                print('\n\n\nLibro non trovato.')
+        else:
+            print('\n\n\nUn utente ha il libro prenotato...Impossibile modificare o cancellare il libro richiesto.')
 
     ##Ricerca/Modifica/Cancellazione di un tesserato
     elif scelta == '6':
-        modifica = input('Inserire il codice del libro da ricercare: ')
+        nonmodifica = False
+        modifica = input('Inserire il codice utente da ricercare: ')
+        
+        for cont in range (len(lista_utenti)):
+            if lista_utenti[cont].libroprenotato != False:
+                nonmodifica = True
 
-        trovato= False
-        for cont in range(len(lista_utenti)):
-            if modifica == lista_utenti[cont].codice:
-                trovato = True
-                print(lista_utenti[cont].visualizzalibro())
+        if nonmodifica == False:     
+            trovato = False
+            for cont in range(len(lista_utenti)):
+                if modifica == lista_utenti[cont].codice:
+                    trovato = True
+                    print(lista_utenti[cont].visualizzalibro())
+                    modcanc = input('Desidera modificare o cancellare il libro?\n1-Modifica\n2-Cancella\n>>>')
 
-        if trovato == True:
-            modcanc = input('Desidera modificare o cancellare il libro?\n1-Modifica\n2-Cancella\n>>>')
+                    if modcanc == '1':
+                        nome = input('Inserire il nuovo nome oppure lasciare vuoto con invio: ')
+                        cognome = input('Inserire il nuovo cognome oppure lasciare vuoto con invio: ')
+                        codice = input('Inserire il nuovo codice oppure lasciare vuoto con invio:')
+                        libroprenotato = 'False'
 
-
-            if modcanc == '1':
-                pass
-            elif modcanc == '2':
-                pass
-            else:
-                print('\n\n\nErrore....riprovare.')
+                        lista_utenti[cont].modificatuttoutente(nome,cognome,genere,codice,prestato)
+                        
+                    elif modcanc == '2':
+                        lista_utenti.remove(lista_utenti[cont])
+                    else:
+                        print('\n\n\nErrore....riprovare.')
+                        
+            if trovato == False:
+                print('\n\n\nTesserato non trovato.')
         else:
-            print('\n\n\nTesserato non trovato.')
+            print('\n\n\nUn utente ha il libro prenotato...Impossibile modificare o cancellare il tesserato richiesto.')
 
     ##Visualizzazione di tutti i libri##
     elif scelta == '7':
@@ -242,8 +319,12 @@ while(scelta != '11'):
     else:
         print('\n\nErrore......')
 
+with open("Libri.txt","w") as f: 
+    for cont in range(len(lista_libri)):
+        lista_libri[cont].filelibri(f)
+        
+with open("Utenti.txt","w") as f:
+    for cont in range(len(lista_utenti)):
+        lista_utenti[cont].fileutenti(f)
 
-
-
-##l'ora attuale##
-##time.ctime()
+    
