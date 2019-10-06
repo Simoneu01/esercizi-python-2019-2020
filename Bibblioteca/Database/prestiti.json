@@ -1,0 +1,26 @@
+[
+    {
+        "prestitoid": 1,
+        "libroid": "0",
+        "utenteid": "0",
+        "in_ritardo": false,
+        "preso_il": "2019-10-06 16:55:20.481940",
+        "scadenza": "2019-10-21 16:55:20.481940"
+    },
+    {
+        "prestitoid": 2,
+        "libroid": "0",
+        "utenteid": "0",
+        "in_ritardo": true,
+        "preso_il": "2019-10-01 16:55:20.481940",
+        "scadenza": "2019-10-05 16:55:20.481940"
+    },
+    {
+        "prestitoid": 3,
+        "libroid": "0",
+        "utenteid": "0",
+        "in_ritardo": false,
+        "preso_il": "2019-10-06 17:14:57.699094",
+        "scadenza": "2019-10-21 17:14:57.699094"
+    }
+]

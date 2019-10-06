@@ -1,1 +1,22 @@
-[]
+[
+    {
+        "userid": 0,
+        "nome": "Simone",
+        "cognome": "Ungaro",
+        "email": "simoneuinga@",
+        "telefono": "sainfinafa",
+        "cap": "nasifnaif",
+        "codice_fiscale": "isafniafnianf",
+        "lista_libri": []
+    },
+    {
+        "userid": 1,
+        "nome": "Federico",
+        "cognome": "Ungaro",
+        "email": "test@test.com",
+        "telefono": "6354",
+        "cap": "55454",
+        "codice_fiscale": "5454544554",
+        "lista_libri": []
+    }
+]

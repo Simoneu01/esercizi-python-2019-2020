@@ -1,15 +1,49 @@
 [
     {
         "libroid": 0,
-        "titolo": "Libro 1",
-        "genere": "Genere 1",
-        "autore": "Autore 1"
+        "titolo": "Titolo 0",
+        "genere": "Genere 0",
+        "autore": "Autore 0",
+        "isbn": "ISBN 0"
     },
     {
         "libroid": 1,
+        "titolo": "Titolo 1",
+        "genere": "Genere 1",
+        "autore": "Autore 1",
+        "isbn": "ISBN 1"
+    },
+    {
+        "libroid": 2,
         "titolo": "Titolo 2",
         "genere": "Genere 2",
         "autore": "Autore 2",
         "isbn": "ISBN 2"
+    },
+    {
+        "libroid": 3,
+        "titolo": "Titolo 3",
+        "genere": "Genere 3",
+        "autore": "Autore 3"
+    },
+    {
+        "libroid": 4,
+        "titolo": "Titolo 4",
+        "genere": "Genere 4",
+        "autore": "Autore 4",
+        "isbn": "ISBN 4"
+    },
+    {
+        "libroid": 5,
+        "titolo": "Titolo 5",
+        "genere": "Genere 5",
+        "autore": "Autore 5"
+    },
+    {
+        "libroid": 6,
+        "titolo": "Titolo 6",
+        "genere": "Genere 6",
+        "autore": "Autore 6",
+        "isbn": "ISBN 6"
     }
 ]

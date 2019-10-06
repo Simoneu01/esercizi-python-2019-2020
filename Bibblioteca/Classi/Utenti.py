@@ -6,7 +6,7 @@
 
 class Utenti():
     def __init__(self, userid, nome, cognome, email, telefono, codice_fiscale=None, cap=None):
-        self.id = userid
+        self.userid = userid
         self.nome = nome
         self.cognome = cognome
         self.email = email
@@ -28,3 +28,6 @@ class Utenti():
             self.codice_fiscale = codice_fiscale
         if self.cap != cap & cap != '':
             self.cap = cap
+
+    def aggiungi_libro(self, id_libro):
+        self.lista_libri.append(id_libro)
