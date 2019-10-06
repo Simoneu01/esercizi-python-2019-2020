@@ -13,7 +13,7 @@ class Utenti():
         self.telefono = telefono
         self.cap = cap
         self.codice_fiscale = codice_fiscale
-        self.lista_libri = []
+        self.cronologia_lista_libri = []
 
     def modifica(self, nome, cognome, email, telefono, cap, codice_fiscale):
         if self.nome != nome & nome != '':
@@ -29,5 +29,5 @@ class Utenti():
         if self.cap != cap & cap != '':
             self.cap = cap
 
-    def aggiungi_libro(self, id_libro):
-        self.lista_libri.append(id_libro)
+    def aggiungi_libro(self, prestito):
+        self.cronologia_lista_libri.append(prestito)
